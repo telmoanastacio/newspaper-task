@@ -22,6 +22,14 @@ public class OsInfo implements Serializable
     @XmlAttribute(name = "version")
     public String version;
 
+    public OsInfo() {}
+
+    public OsInfo(String name, String version)
+    {
+        this.name = name;
+        this.version = version;
+    }
+
     public String getName()
     {
         return name;

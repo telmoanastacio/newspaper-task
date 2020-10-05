@@ -22,6 +22,14 @@ public class EpaperRequest implements Serializable
     @XmlElement(name = "getPages", type = GetPages.class)
     public GetPages getPages;
 
+    public EpaperRequest() {}
+
+    public EpaperRequest(DeviceInfo deviceInfo, GetPages getPages)
+    {
+        this.deviceInfo = deviceInfo;
+        this.getPages = getPages;
+    }
+
     public DeviceInfo getDeviceInfo()
     {
         return deviceInfo;

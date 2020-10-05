@@ -22,6 +22,14 @@ public class AppInfo implements Serializable
     @XmlElement(name = "version", type = String.class)
     public String version;
 
+    public AppInfo() {}
+
+    public AppInfo(String newspaperName, String version)
+    {
+        this.newspaperName = newspaperName;
+        this.version = version;
+    }
+
     public String getNewspaperName()
     {
         return newspaperName;

@@ -1,10 +1,14 @@
 package com.tsilva.newspapertask;
 
+import com.tsilva.newspapertask.controller.rest.RestControllerNews;
+import com.tsilva.newspapertask.controller.rest.contract.request.*;
 import com.tsilva.newspapertask.controller.rest.validator.EPaperRequestValidatorXsd;
 import com.tsilva.newspapertask.controller.rest.validator.XsdValidator;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -15,8 +19,17 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class NewspaperTaskApplicationTests
 {
+	@Autowired
+	private RestControllerNews restControllerNews;
+
+	@Autowired
+	HttpServletResponse response;
+
 	@Test
-	void contextLoads() {}
+	void contextLoads()
+	{
+		assertNotNull(restControllerNews);
+	}
 
 	@Test
 	void validateControlXml()
@@ -81,6 +94,51 @@ class NewspaperTaskApplicationTests
 			// this validation is supposed to return false, xml is not valid against xsd
 			assertFalse(isValid);
 		}
+	}
+
+	@Test
+	void controlDataRestControllerPost()
+	{
+		EpaperRequest epaperRequest = new EpaperRequest(
+				new DeviceInfo(
+						new ScreenInfo(1280, 752, 160),
+						new OsInfo("Browser", "1.0"),
+						new AppInfo("abb", "1.0"),
+						"Browser",
+						"test@comp"),
+				new GetPages(11, "2017-06-06"));
+
+		assertTrue(restControllerNews.postNews(epaperRequest, response));
+	}
+
+	@Test
+	void missingTagsDataRestControllerPost()
+	{
+		EpaperRequest epaperRequest = new EpaperRequest(
+				new DeviceInfo(
+						null,
+						new OsInfo("Browser", "1.0"),
+						new AppInfo("abb", "1.0"),
+						"Browser",
+						"test@comp"),
+				new GetPages(11, "2017-06-06"));
+
+		assertFalse(restControllerNews.postNews(epaperRequest, response));
+	}
+
+	@Test
+	void noAttributeDataRestControllerPost()
+	{
+		EpaperRequest epaperRequest = new EpaperRequest(
+				new DeviceInfo(
+						new ScreenInfo(1280, 752, 160),
+						new OsInfo(null, null),
+						new AppInfo("abb", "1.0"),
+						null,
+						null),
+				new GetPages(11, "2017-06-06"));
+
+		assertFalse(restControllerNews.postNews(epaperRequest, response));
 	}
 
 	private String readFile(String path, Charset encoding)

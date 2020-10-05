@@ -22,6 +22,14 @@ public class GetPages implements Serializable
     @XmlAttribute(name = "publicationDate")
     public String publicationDate;
 
+    public GetPages() {}
+
+    public GetPages(Integer editionDefId, String publicationDate)
+    {
+        this.editionDefId = editionDefId;
+        this.publicationDate = publicationDate;
+    }
+
     public Integer getEditionDefId()
     {
         return editionDefId;

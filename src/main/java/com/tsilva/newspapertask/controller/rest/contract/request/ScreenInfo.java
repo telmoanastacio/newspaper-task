@@ -25,6 +25,15 @@ public class ScreenInfo implements Serializable
     @XmlAttribute(name = "dpi")
     public Integer dpi;
 
+    public ScreenInfo() {}
+
+    public ScreenInfo(Integer width, Integer height, Integer dpi)
+    {
+        this.width = width;
+        this.height = height;
+        this.dpi = dpi;
+    }
+
     public Integer getWidth()
     {
         return width;

@@ -28,6 +28,17 @@ public class DeviceInfo implements Serializable
     @XmlAttribute(name = "id")
     public String id;
 
+    public DeviceInfo() {}
+
+    public DeviceInfo(ScreenInfo screenInfo, OsInfo osInfo, AppInfo appInfo, String name, String id)
+    {
+        this.screenInfo = screenInfo;
+        this.osInfo = osInfo;
+        this.appInfo = appInfo;
+        this.name = name;
+        this.id = id;
+    }
+
     public ScreenInfo getScreenInfo()
     {
         return screenInfo;
