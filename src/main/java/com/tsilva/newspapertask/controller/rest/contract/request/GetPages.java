@@ -17,20 +17,20 @@ public class GetPages implements Serializable
     private static final long serialVersionUID = 48220057L;
 
     @XmlAttribute(name = "editionDefId")
-    public Integer editionDefId;
+    public Long editionDefId;
 
     @XmlAttribute(name = "publicationDate")
     public String publicationDate;
 
     public GetPages() {}
 
-    public GetPages(Integer editionDefId, String publicationDate)
+    public GetPages(Long editionDefId, String publicationDate)
     {
         this.editionDefId = editionDefId;
         this.publicationDate = publicationDate;
     }
 
-    public Integer getEditionDefId()
+    public Long getEditionDefId()
     {
         return editionDefId;
     }
@@ -40,7 +40,7 @@ public class GetPages implements Serializable
         return publicationDate;
     }
 
-    public GetPages setEditionDefId(Integer editionDefId)
+    public GetPages setEditionDefId(Long editionDefId)
     {
         this.editionDefId = editionDefId;
         return this;

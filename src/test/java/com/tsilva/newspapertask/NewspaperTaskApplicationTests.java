@@ -106,7 +106,7 @@ class NewspaperTaskApplicationTests
 						new AppInfo("abb", "1.0"),
 						"Browser",
 						"test@comp"),
-				new GetPages(11, "2017-06-06"));
+				new GetPages(11L, "2017-06-06"));
 
 		assertTrue(restControllerNews.postNews(epaperRequest, response));
 	}
@@ -121,7 +121,7 @@ class NewspaperTaskApplicationTests
 						new AppInfo("abb", "1.0"),
 						"Browser",
 						"test@comp"),
-				new GetPages(11, "2017-06-06"));
+				new GetPages(11L, "2017-06-06"));
 
 		assertFalse(restControllerNews.postNews(epaperRequest, response));
 	}
@@ -136,7 +136,7 @@ class NewspaperTaskApplicationTests
 						new AppInfo("abb", "1.0"),
 						null,
 						null),
-				new GetPages(11, "2017-06-06"));
+				new GetPages(11L, "2017-06-06"));
 
 		assertFalse(restControllerNews.postNews(epaperRequest, response));
 	}
