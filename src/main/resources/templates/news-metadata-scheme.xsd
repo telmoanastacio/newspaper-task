@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="epaperRequest">
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element name="deviceInfo">
+                    <xsd:complexType>
+                        <xsd:all>
+                            <xsd:element name="screenInfo">
+                                <xsd:complexType>
+                                    <xsd:attribute name="width" type="xsd:integer" use="required"/>
+                                    <xsd:attribute name="height" type="xsd:integer" use="required"/>
+                                    <xsd:attribute name="dpi" type="xsd:integer" use="required"/>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="osInfo">
+                                <xsd:complexType>
+                                    <xsd:attribute name="name" type="xsd:string" use="required"/>
+                                    <xsd:attribute name="version" type="xsd:string" use="required"/>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="appInfo">
+                                <xsd:complexType>
+                                    <xsd:all>
+                                        <xsd:element name="newspaperName" type="xsd:string"/>
+                                        <xsd:element name="version" type="xsd:string"/>
+                                    </xsd:all>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:all>
+                        <xsd:attribute name="name" type="xsd:string" use="required"/>
+                        <xsd:attribute name="id" type="xsd:string" use="required"/>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="getPages">
+                    <xsd:complexType>
+                        <xsd:attribute name="editionDefId" type="xsd:integer" use="required"/>
+                        <xsd:attribute name="publicationDate" type="xsd:date" use="required"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:all>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
