@@ -1,20 +1,14 @@
 package com.tsilva.newspapertask;
 
+import com.tsilva.newspapertask.controller.rest.validator.EPaperRequestValidatorXsd;
+import com.tsilva.newspapertask.controller.rest.validator.XsdValidator;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.xml.sax.SAXException;
 
-import javax.xml.XMLConstants;
-import javax.xml.transform.Source;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-import javax.xml.validation.Validator;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,29 +22,14 @@ class NewspaperTaskApplicationTests
 	void validateControlXml()
 	{
 		boolean isValid = false;
-		File xmlFile = new File("src/main/resources/templates/news-metadata.xml");
-		File schemaFile = new File("src/main/resources/templates/news-metadata-scheme.xsd");
-		Source xmlFileSrc = null;
+		XsdValidator xsdValidator = new EPaperRequestValidatorXsd();
 		try
 		{
-			xmlFileSrc = new StreamSource(new FileInputStream(xmlFile));
-			SchemaFactory schemaFactory = SchemaFactory
-					.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-
-			Schema schema = schemaFactory.newSchema(schemaFile);
-			Validator validator = schema.newValidator();
-			validator.validate(xmlFileSrc);
-			isValid = true;
-		}
-		catch (FileNotFoundException e)
-		{
-			e.printStackTrace();
+			isValid = xsdValidator.validate(readFile(
+					"src/test/resources/templates/news-metadata-control.xml",
+					Charset.defaultCharset()));
 		}
 		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		catch (SAXException e)
 		{
 			e.printStackTrace();
 		}
@@ -58,5 +37,56 @@ class NewspaperTaskApplicationTests
 		{
 			assertTrue(isValid);
 		}
+	}
+
+	@Test
+	void validateNoAttributeXml()
+	{
+		boolean isValid = false;
+		XsdValidator xsdValidator = new EPaperRequestValidatorXsd();
+		try
+		{
+			isValid = xsdValidator.validate(readFile(
+					"src/test/resources/templates/news-metadata-control-no-attribute.xml",
+					Charset.defaultCharset()));
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			// this validation is supposed to return false, xml is not valid against xsd
+			assertFalse(isValid);
+		}
+	}
+
+	@Test
+	void validateMissingTagsXml()
+	{
+		boolean isValid = false;
+		XsdValidator xsdValidator = new EPaperRequestValidatorXsd();
+		try
+		{
+			isValid = xsdValidator.validate(readFile(
+					"src/test/resources/templates/news-metadata-control-missing-tags.xml",
+					Charset.defaultCharset()));
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			// this validation is supposed to return false, xml is not valid against xsd
+			assertFalse(isValid);
+		}
+	}
+
+	private String readFile(String path, Charset encoding)
+			throws IOException
+	{
+		byte[] encoded = Files.readAllBytes(Paths.get(path));
+		return new String(encoded, encoding);
 	}
 }
