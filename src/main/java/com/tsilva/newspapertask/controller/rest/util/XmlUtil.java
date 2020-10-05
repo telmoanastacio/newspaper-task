@@ -25,7 +25,6 @@ public class XmlUtil
             JAXBContext jaxbContext = JAXBContext.newInstance(data.getClass());
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            //jaxbMarshaller.marshal(data, System.out);
             StringWriter sw = new StringWriter();
             jaxbMarshaller.marshal(data, sw);
             xml = sw.toString();
