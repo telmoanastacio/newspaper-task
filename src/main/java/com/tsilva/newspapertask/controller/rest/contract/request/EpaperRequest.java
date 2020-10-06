@@ -17,10 +17,10 @@ public class EpaperRequest implements Serializable
     private static final long serialVersionUID = 48220055L;
 
     @XmlElement(name = "deviceInfo", type = DeviceInfo.class)
-    public DeviceInfo deviceInfo;
+    private DeviceInfo deviceInfo;
 
     @XmlElement(name = "getPages", type = GetPages.class)
-    public GetPages getPages;
+    private GetPages getPages;
 
     public EpaperRequest() {}
 

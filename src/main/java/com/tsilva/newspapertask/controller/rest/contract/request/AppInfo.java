@@ -17,10 +17,10 @@ public class AppInfo implements Serializable
     private static final long serialVersionUID = 48220060L;
 
     @XmlElement(name = "newspaperName", type = String.class)
-    public String newspaperName;
+    private String newspaperName;
 
     @XmlElement(name = "version", type = String.class)
-    public String version;
+    private String version;
 
     public AppInfo() {}
 

@@ -17,13 +17,13 @@ public class ScreenInfo implements Serializable
     private static final long serialVersionUID = 48220058L;
 
     @XmlAttribute(name = "width")
-    public Integer width;
+    private Integer width;
 
     @XmlAttribute(name = "height")
-    public Integer height;
+    private Integer height;
 
     @XmlAttribute(name = "dpi")
-    public Integer dpi;
+    private Integer dpi;
 
     public ScreenInfo() {}
 

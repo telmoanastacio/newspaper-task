@@ -14,19 +14,19 @@ public class DeviceInfo implements Serializable
     private static final long serialVersionUID = 48220056L;
 
     @XmlElement(name = "screenInfo")
-    public ScreenInfo screenInfo;
+    private ScreenInfo screenInfo;
 
     @XmlElement(name = "osInfo")
-    public OsInfo osInfo;
+    private OsInfo osInfo;
 
     @XmlElement(name = "appInfo")
-    public AppInfo appInfo;
+    private AppInfo appInfo;
 
     @XmlAttribute(name = "name")
-    public String name;
+    private String name;
 
     @XmlAttribute(name = "id")
-    public String id;
+    private String id;
 
     public DeviceInfo() {}
 

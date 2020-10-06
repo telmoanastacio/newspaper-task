@@ -17,10 +17,10 @@ public class GetPages implements Serializable
     private static final long serialVersionUID = 48220057L;
 
     @XmlAttribute(name = "editionDefId")
-    public Long editionDefId;
+    private Long editionDefId;
 
     @XmlAttribute(name = "publicationDate")
-    public String publicationDate;
+    private String publicationDate;
 
     public GetPages() {}
 

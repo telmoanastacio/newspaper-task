@@ -17,10 +17,10 @@ public class OsInfo implements Serializable
     private static final long serialVersionUID = 48220059L;
 
     @XmlAttribute(name = "name")
-    public String name;
+    private String name;
 
     @XmlAttribute(name = "version")
-    public String version;
+    private String version;
 
     public OsInfo() {}
 

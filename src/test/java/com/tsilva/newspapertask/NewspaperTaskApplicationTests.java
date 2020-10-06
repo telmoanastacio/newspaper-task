@@ -26,7 +26,7 @@ class NewspaperTaskApplicationTests
 	private RestControllerNews restControllerNews;
 
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 
 	@Autowired
 	private IDeviceInfoJpaRepository iDeviceInfoJpaRepository;
