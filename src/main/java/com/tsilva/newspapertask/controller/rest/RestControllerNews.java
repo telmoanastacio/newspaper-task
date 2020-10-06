@@ -8,12 +8,11 @@ import com.tsilva.newspapertask.persistence.entity.DeviceInfo;
 import com.tsilva.newspapertask.persistence.entity.GetPages;
 import com.tsilva.newspapertask.service.INewsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.lang.Nullable;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by Telmo Silva on 05.10.2020.
@@ -60,5 +59,25 @@ public class RestControllerNews
         }
 
         return isValid;
+    }
+
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    public List<EpaperRequest> getNews(HttpServletResponse response,
+                                       @Nullable @RequestParam(name = "sort", required = false) String sort,
+                                       @Nullable @RequestParam(name = "page", required = false) Integer page,
+                                       @Nullable @RequestParam(name = "filter", required = false) String filter)
+    {
+        List<EpaperRequest> epaperRequestList = iNewsService.getNews(sort, page, filter);
+
+        if(epaperRequestList == null)
+        {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        }
+        else
+        {
+            response.setStatus(HttpServletResponse.SC_OK);
+        }
+
+        return epaperRequestList;
     }
 }
